@@ -6,7 +6,6 @@ print("Yay! Printing.")
 #print('I "said" do not touch this.')
 #print('yet another line')
 # create a list
-alphabit = [a, b, c, d, e, f, g, h, i, j, k]
+alphabit = ['a', 'b,' 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']
 for letter in alphabit:
     print(letter)
-
