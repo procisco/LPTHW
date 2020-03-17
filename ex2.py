@@ -13,6 +13,9 @@ color = input("Enter either 'red' or 'blue': ")
 
 if color == 'red':
     print("Red is my favorite color")
+    print('Red demands a loop')
+    for red in range(1, 100):
+        print(red, ' Red')
 else:
     print('#' * 30)
     print("Blue is the color of budgies")
