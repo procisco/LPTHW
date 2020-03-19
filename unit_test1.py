@@ -22,3 +22,11 @@ class ConfigurationParser:
         customerNamePattern = r'ip vrf ([a-zA-Z_]+)\n'
         customerNames = re.findall(customerNamePattern, self.deviceConfig)
         return customerNames
+
+    def parseCustomerVlan(self, customerName):
+        intPattern = (
+            r"interface GigabitEthernet0/0.([0-9]+)\n\s+encapsulation\s+"
+            r"dot1Q [0-9]+\n\s+ip vrf forwarding %s" % (customerName)
+        )
+        allCustomerSubInterfaces = re.search(intPattern, self.deviceConfig)
+        return int(allCustomerSubInterfaces.group(1))
