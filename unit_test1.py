@@ -16,6 +16,13 @@ class TestParse(unittest.TestCase):
         parsed_vlan = cp.parseCustomerVlan(customer_name)
         self.assertEqual(expected_vlan, parsed_vlan)
 
+    def test_parse_cust_ip_address(self):
+        cp = ConfigurationParser()
+        customer_vlan = 100
+        expected_ip = "10.10.100.1"
+        parsed_ip = cp.parseCustomerIPAddress(customer_vlan)
+        self.assertEqual(expected_ip, parsed_ip)
+
 class ConfigurationParser:
     deviceConfig = open("isp_config1", "r").read()
     def parseCustomerNames(self):
@@ -30,3 +37,8 @@ class ConfigurationParser:
         )
         allCustomerSubInterfaces = re.search(intPattern, self.deviceConfig)
         return int(allCustomerSubInterfaces.group(1))
+
+    def parseCustomerIPAddress(self, vlan):
+        customerIpPattern = r'GigabitEthernet0/0.%s[ ]+([0-9\.]+)'% (vlan)
+        customerIpAddress = re.search(customerIpPattern, self.deviceConfig)
+        return customerIpAddress.group(1)
